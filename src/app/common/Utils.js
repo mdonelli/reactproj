@@ -18,8 +18,14 @@ export const UTILS = {
             const xhr = new XMLHttpRequest();
             xhr.open(method, url);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            xhr.onload = () => resolve(JSON.parse(xhr.responseText));
-            xhr.onerror = () => reject(xhr.statusText);
+            xhr.onload = () => { 
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    resolve(JSON.parse(xhr.responseText))
+                } else {
+                    reject(xhr.responseText);
+                }
+            };
+            xhr.onerror = () => reject(xhr.responseText);
             if (data) {
                 xhr.send(JSON.stringify(data));
             } else {

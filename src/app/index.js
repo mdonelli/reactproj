@@ -18,7 +18,7 @@ const initialState = {
 };
 
 const createNewReceipt = function () {
-    return { id: 0, date: "",store: {name: "", id: 0}, articles: [createNewArticle()]};
+    return { id: null, date: "",store: {name: "", id: 0}, articles: [createNewArticle()]};
 };
 
 let idGenerated = 0;

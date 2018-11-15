@@ -23,13 +23,13 @@ class ConnectedReceiptsPage extends React.Component {
         if (validity !== true) {
             alert(validity);
         } else {
-            UTILS.ajaxCall(URLS.CTRL_RECEIPT + "receipt/" + this.props.selectedReceipt.id, "POST", this.props.selectedReceipt)
-                .then(() => this.loadData()).catch(msg => alert(msg));
+            UTILS.ajaxCall(URLS.CTRL_RECEIPT + "receipt/" + this.props.selectedReceipt.id, "POST", {action: "save", receipt: this.props.selectedReceipt})
+                .then(() => this.loadData()).catch(msg => {console.log("caught");alert(msg);});
         }
     }
 
     deleteReceipt = (id) => {
-        UTILS.ajaxCall(URLS.CTRL_RECEIPT + "receipt/delete/" + id, "GET")
+        UTILS.ajaxCall(URLS.CTRL_RECEIPT + "receipt/" + id, "POST", {action: "delete"})
             .then(() => this.loadData()).catch(msg => alert(msg));
     }
 
